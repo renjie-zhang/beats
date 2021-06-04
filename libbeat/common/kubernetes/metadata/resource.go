@@ -51,7 +51,7 @@ func (r *Resource) Generate(kind string, obj kubernetes.Resource, options ...Fie
 
 	labelMap := common.MapStr{}
 	if len(r.config.IncludeLabels) == 0 {
-		labelMap = generateMap(accessor.GetLabels(), r.config.LabelsDedot)
+		labelMap = GenerateMap(accessor.GetLabels(), r.config.LabelsDedot)
 	} else {
 		labelMap = generateMapSubset(accessor.GetLabels(), r.config.IncludeLabels, r.config.LabelsDedot)
 	}
@@ -61,7 +61,7 @@ func (r *Resource) Generate(kind string, obj kubernetes.Resource, options ...Fie
 		labelMap.Delete(label)
 	}
 
-	annotationsMap := generateMapSubset(accessor.GetAnnotations(), r.config.IncludeAnnotations, r.config.LabelsDedot)
+	annotationsMap := generateMapSubset(accessor.GetAnnotations(), r.config.IncludeAnnotations, r.config.AnnotationsDedot)
 
 	meta := common.MapStr{
 		strings.ToLower(kind): common.MapStr{
@@ -126,7 +126,7 @@ func generateMapSubset(input map[string]string, keys []string, dedot bool) commo
 	return output
 }
 
-func generateMap(input map[string]string, dedot bool) common.MapStr {
+func GenerateMap(input map[string]string, dedot bool) common.MapStr {
 	output := common.MapStr{}
 	if input == nil {
 		return output

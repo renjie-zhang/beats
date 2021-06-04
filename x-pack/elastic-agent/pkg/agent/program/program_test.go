@@ -384,8 +384,8 @@ func TestConfiguration(t *testing.T) {
 		err      bool
 	}{
 		"single_config": {
-			programs: []string{"filebeat", "heartbeat", "metricbeat", "endpoint", "packetbeat"},
-			expected: 5,
+			programs: []string{"filebeat", "fleet-server", "heartbeat", "metricbeat", "endpoint", "packetbeat"},
+			expected: 6,
 		},
 		// "audit_config": {
 		// 	programs: []string{"auditbeat"},
@@ -395,6 +395,10 @@ func TestConfiguration(t *testing.T) {
 		// 	programs: []string{"journalbeat"},
 		// 	expected: 1,
 		// },
+		"fleet_server": {
+			programs: []string{"fleet-server"},
+			expected: 1,
+		},
 		"synthetics_config": {
 			programs: []string{"heartbeat"},
 			expected: 1,
